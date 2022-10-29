@@ -69,9 +69,9 @@ const gallery = document.querySelector('.js-gallery');
 const lightbox = document.querySelector('.lightbox');
 const bigImg = document.querySelector('.lightbox__image');
 const btnModal = document.querySelector('.lightbox__button');
-const escBtn = window.addEventListener('keydown', onClickBtnEsc);
 const lightboxOverlayClick = document.querySelector('.lightbox__overlay');
 const flipImg = window.addEventListener('keydown', flipBigImg);
+const escBtn = window.addEventListener('keydown', onClickBtnEsc);
 
 
 gallery.addEventListener('click', onOpenModal);
@@ -108,8 +108,9 @@ function onClickImg(e) {
 
 function onOpenModal(a) {  
   lightbox.classList.add('is-open');
-  bigImg.src=a.target.dataset.source;  
- onClickImg(a)
+  bigImg.src = a.target.dataset.source;   
+  bigImg.alt = a.target.alt;
+   onClickImg(a)
   
 }
 
@@ -126,7 +127,9 @@ function onClickBtnEsc(e) {
   
 }
 function onClearSrc() {
-  bigImg.src=''; 
+  bigImg.src = ''; 
+   bigImg.alt = '';
+  
 }
 
 function flipBigImgRight() {
@@ -134,6 +137,7 @@ function flipBigImgRight() {
     if (galleryItems[i].original == bigImg.src) {
       i = i + 1;
       bigImg.src = galleryItems[i].original;
+      bigImg.alt = galleryItems[i].description;
     }
   }
 }
@@ -143,6 +147,7 @@ function flipBigImgLeft(e) {
     if (galleryItems[i].original == bigImg.src) {
       i = i - 1;
       bigImg.src = galleryItems[i].original;
+      bigImg.alt = galleryItems[i].description;
     }
   }
 }
@@ -153,9 +158,7 @@ function flipBigImg(e) {
   }
   if (e.key == "ArrowLeft") {
     flipBigImgLeft();
-  }
-    
-  
+  }  
 }
 
 
